@@ -1,4 +1,4 @@
-function [trackmate, model, settings] = trackMateExample(imp)
+function [trackmate, model, settings, selectionModel] = trackMateExample(imp)
 
 %----------------------------
 % Create the model object now
@@ -26,7 +26,7 @@ map.put('DETECTOR_NAME', 'LOG_DETECTOR');
 map.put('DO_SUBPIXEL_LOCALIZATION', true);
 map.put('RADIUS', 0.25);
 map.put('TARGET_CHANNEL', 1);
-map.put('THRESHOLD', 5000);
+map.put('THRESHOLD', 5000); 
 map.put('DO_MEDIAN_FILTERING', false);
 settings.detectorSettings = map;
     
@@ -34,11 +34,12 @@ settings.detectorSettings = map;
 filter1 = fiji.plugin.trackmate.features.FeatureFilter('QUALITY', 0.0, true);
 settings.addSpotFilter(filter1)
      
-% Configure tracker - We want to allow splits and fusions
+%Configure tracker - We want to allow splits and fusions
 settings.trackerFactory = fiji.plugin.trackmate.tracking.LAPTrackerFactory();
 settings.trackerSettings = fiji.plugin.trackmate.tracking.LAPUtils.getDefaultLAPSettingsMap(); % almost good enough
 settings.trackerSettings.put('LINKING_MAX_DISTANCE', 1);
 settings.trackerSettings.put('GAP_CLOSING_MAX_DISTANCE', 1);
+
 %settings.trackerSettings.put('ALLOW_TRACK_SPLITTING', true);
 %settings.trackerSettings.put('ALLOW_TRACK_MERGING', true);
     

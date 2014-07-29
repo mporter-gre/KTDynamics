@@ -16,7 +16,7 @@ end
 
 imageStack = ij.ImageStack(sizeX,sizeY);
 for thisPlane = 1:numPlanes
-    %bytesOut = toByteArray(stackIn(:,:,thisPlane), pixels);
+    %byteArray = toByteArray(stackIn(:,:,thisPlane), pixels);
     byteArray = reshape(stackIn(:,:,thisPlane)', sizeX * sizeY, 1 );
     imageStack.addSlice('',byteArray);
 end
