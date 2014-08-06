@@ -12,5 +12,5 @@ for thisT = allT
     y = vertcat(spotFeatures(startT:endT).y);
     z = vertcat(spotFeatures(startT:endT).z);
     
-    [fitResult, gof, fitOutput] = fit([z, y], x, plateFcn);
+    [fitResult{thisT+1}, gof{thisT+1}, fitOutput{thisT+1}] = fit([z, y], x, plateFcn{thisT+1});
 end

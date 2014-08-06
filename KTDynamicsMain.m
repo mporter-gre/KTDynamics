@@ -18,8 +18,8 @@ spotFeaturesForAnalysisHec1 = getLongTracks(spotFeaturesHec1, 10);
 [fitResultsHec1, gofsHec1, fitOutputsHec1] = residualsFromPlate(spotFeaturesHec1, fitResultsCenpA);
 
 for thisT = 1:10
-    residualsCenpA{thisT} = residuals(fitResultsCenpA);
-    residualsHec1{thisT} = residuals(fitResultsHec1);
+    residualsCenpA{thisT} = fitOutputsCenpA{thisT}.residuals;
+    residualsHec1{thisT} = fitOutputsHec1{thisT}.residuals;
 end
 
 
