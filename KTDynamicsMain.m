@@ -11,14 +11,20 @@ spotFeaturesHec1 = getSpotFeatures(modelHec1);
 spotFeaturesForAnalysisHec1 = getLongTracks(spotFeaturesHec1, 10);
 
 %Define the metaphase plate for each time point
-
+[fitResultsCenpA, gofsCenpA, fitOutputsCenpA] = definePlate(spotFeaturesCenpA);
 
 
 %Measure the distance from each point to the plate
+[fitResultsHec1, gofsHec1, fitOutputsHec1] = residualsFromPlate(spotFeaturesHec1, fitResultsCenpA);
+
+for thisT = 1:10
+    residualsCenpA{thisT} = residuals(fitResultsCenpA);
+    residualsHec1{thisT} = residuals(fitResultsHec1);
+end
 
 
-
-%Pair up CenpA and Hec1 spots per time point
+%Pair up CenpA and Hec1 spots per time point, maybe get the residuals after
+%this to avoid having to re-order data all the time.
 
 
 
