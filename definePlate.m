@@ -1,4 +1,4 @@
-function [fitResult, gof, fitOutput] = definePlate(spotFeatures)
+function [fitResult, gof, fitOutput, outliers] = definePlate(spotFeatures)
 
 t = vertcat(spotFeatures.t);
 allT = unique(t)';
@@ -16,7 +16,23 @@ for thisT = allT
     %Fit a line to the coords
     [xData, yData, zData] = prepareSurfaceData(x, y, z);
         
-    % Fit model to data.
+    %Recursively fit model to data, removing outliers.
     [fitResult{counter}, gof{counter}, fitOutput{counter}] = fit([zData, yData], xData, ft);
+    
+    [outlierIdx,inlierIdx] = detectOutliers(fitOutput{counter}.residuals,3);
+    outliers = outlierIdx;
+    while ~isempty(outlierIdx)
+        numOutliers = length(outlierIdx);
+        for thisOutlier = 1:numOutliers
+            x(outlierIdx(thisoutlier)) = [];
+            y(outlierIdx(thisoutlier)) = [];
+            z(outlierIdx(thisoutlier)) = [];
+        end
+        [fitResult{counter}, gof{counter}, fitOutput{counter}] = fit([zData, yData], xData, ft);
+        [outlierIdx,inlierIdx] = detectOutliers(fitOutput{counter}.residuals,3);
+        outliers = [outliers; outlierIdx];
+    end
+    
+    
     counter = counter + 1;
 end

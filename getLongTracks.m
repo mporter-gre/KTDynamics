@@ -23,3 +23,5 @@ for thisTrack = 1:numTracks
 end
 
 spotsOut(1) = [];
+infIdx = find([spotsOut(:).trackId]==inf);
+spotsOut(infIdx) = [];

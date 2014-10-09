@@ -26,7 +26,7 @@ map.put('DETECTOR_NAME', 'LOG_DETECTOR');
 map.put('DO_SUBPIXEL_LOCALIZATION', true);
 map.put('RADIUS', 0.25);
 map.put('TARGET_CHANNEL', 1);
-map.put('THRESHOLD', 5000); 
+map.put('THRESHOLD', 25000); 
 map.put('DO_MEDIAN_FILTERING', false);
 settings.detectorSettings = map;
     

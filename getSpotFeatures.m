@@ -4,6 +4,11 @@ function spotFeatures = getSpotFeatures(model)
 %Retreive the x y z t and id of each spot in model
 
 spots = model.getSpots;
+numSpots = spots.getNSpots(0);
+if numSpots == 0
+    spotFeatures = [];
+    return;
+end
 tracks = model.getTrackModel;
 spotsIter = spots.iterator(1);
 counter = 1;

@@ -1,16 +1,18 @@
-function [fitResult, gof, fitOutput] = residualsFromPlate(spotFeatures, plateFcn)
+function fitOutput = residualsFromPlate(tracksIn, plateFcn)
 
-t = vertcat(spotFeatures.t);
-allT = unique(t)';
-counter = 1;
 
-for thisT = allT
-    startT = find(t==thisT, 1, 'first');
-    endT = find(t==thisT, 1, 'last');
-    
-    x = vertcat(spotFeatures(startT:endT).x);
-    y = vertcat(spotFeatures(startT:endT).y);
-    z = vertcat(spotFeatures(startT:endT).z);
-    
-    [fitResult{thisT+1}, gof{thisT+1}, fitOutput{thisT+1}] = fit([z, y], x, plateFcn{thisT+1});
+numTracks = length(tracksIn);
+numT = length(tracksIn{1});
+fitOutput = cell(numT,1);
+
+for thisT = 1:numT
+    for thisTrack = 1:numTracks
+        x(thisTrack,1) = tracksIn{thisTrack}(thisT,1);
+        y(thisTrack,1) = tracksIn{thisTrack}(thisT,2);
+        z(thisTrack,1) = tracksIn{thisTrack}(thisT,3);
+    end
+    [~, ~, fitOutput{thisT}]= fit([z, y], x, plateFcn{thisT});
+    x = [];
+    y = [];
+    z = [];
 end
