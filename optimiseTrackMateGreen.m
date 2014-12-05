@@ -34,7 +34,7 @@ while ready == 0
         model  = trackmate.getModel;
         settings = trackmate.getSettings;
     else
-        thresh = thresh + 100;
+        thresh = thresh * floor(numSpots/maxSpots)/2;
         map.put('THRESHOLD', thresh);
         settings.detectorSettings = map;
         trackmate = fiji.plugin.trackmate.TrackMate(model, settings);
