@@ -1,6 +1,6 @@
 function [model, settings] = optimiseTrackMateGreen(imp, maxSpots)
 
-thresh = 11200; %7800 %12700 %30000
+thresh = 4598; %7800 %12700 %30000
 
 model = fiji.plugin.trackmate.Model();
 model.setLogger(fiji.plugin.trackmate.Logger.IJ_LOGGER)
