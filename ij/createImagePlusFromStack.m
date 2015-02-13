@@ -28,11 +28,11 @@ width = pixels.getPhysicalSizeX.getValue;
 height = pixels.getPhysicalSizeY.getValue;
 depth = pixels.getPhysicalSizeZ.getValue;
 
-unit = pixels.getPhysicalSizeX.getUnit;
+%unit = pixels.getPhysicalSizeX.getUnit;
 
 calibration = ij.measure.Calibration();
 calibration.pixelWidth = width;
 calibration.pixelHeight = height;
 calibration.pixelDepth = depth;
-calibration.setUnit(char(unit.toString.getBytes'));
+%calibration.setUnit(char(unit.toString.getBytes'));
 imp.setCalibration(calibration);
